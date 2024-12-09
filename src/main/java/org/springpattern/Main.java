@@ -13,11 +13,11 @@ import org.springpattern.lesson_6.Person;
 public class Main {
     public static void main(String[] args) {
 
-        // Создаем животных
+
         Dog dogBobik = new Dog("Бобик");
         Cat catMurka = new Cat("Мурка");
 
-        // Демонстрация их возможностей
+
         dogBobik.run(555);
         dogBobik.swim(5);
         catMurka.run(150);
@@ -49,14 +49,12 @@ public class Main {
             System.out.println(cat.getName() + " сыт: " + (cat.isSatiety() ? "Да" : "Нет"));
         }
 
-        // Добавляем еще еду в миску и снова просим котов покушать
         System.out.println("\nДобавляем еду в миску...");
         dish.addFood(20);
         for (Cat cat : cats) {
             cat.eat(dish);
         }
 
-        // Вывод финальной информации о сытости
         System.out.println("\nИнформация о котах (финальная):");
         for (Cat cat : cats) {
             System.out.println(cat.getName() + " сыт: " + (cat.isSatiety() ? "Да" : "Нет"));
@@ -66,7 +64,6 @@ public class Main {
         Figure rectangle = new Rectangle(4, 7, "Синий", "Зеленый");
         Figure triangle = new Triangle(3, 4, 5, 2.5, "Желтый", "Фиолетовый");
 
-        // Вывод результатов
         circle.printDetails();
         rectangle.printDetails();
         triangle.printDetails();
