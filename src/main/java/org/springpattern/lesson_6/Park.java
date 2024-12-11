@@ -1,11 +1,18 @@
 package org.springpattern.lesson_6;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Park {
-    private Attraction attraction;
+    private List<Attraction> attractions;
+
+    public Park() {
+        this.attractions = new ArrayList<>();
+    }
 
 
 
-    public class Attraction {
+    private class Attraction {
         private String name;
         private String operatingHours;
         private int price;
@@ -24,11 +31,18 @@ public class Park {
     }
 
     public void addAttraction(String name, String operatingHours, int price) {
-        attraction = new Attraction(name, operatingHours, price);
+        attractions.add(new Attraction(name, operatingHours, price));
     }
 
-    public void printAttraction() {
-        System.out.println(attraction);
+    public void printAttractions() {
+        if (attractions.isEmpty()) {
+            System.out.println("В парке пока нет аттракционов.");
+        } else {
+            System.out.println("Список всех аттракционов в парке:");
+            for (Attraction attraction : attractions) {
+                System.out.println(attraction.toString());
+            }
+        }
     }
 
 }

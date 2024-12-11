@@ -19,13 +19,14 @@ public class Main {
 
 
         for (Person person : persArray) {
-            person.printInfoPerson();
+            System.out.println(person);
         }
 
 
         Park park = new Park();
         park.addAttraction("Roller Coaster", "10-21", 25);
-        park.printAttraction();
+        park.addAttraction("Roller Coaster", "15-17", 100);
+        park.printAttractions();
 
 
 

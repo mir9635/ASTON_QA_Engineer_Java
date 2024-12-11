@@ -17,8 +17,10 @@ public class Person {
         this.age = age;
     }
 
-    public void printInfoPerson() {
-        System.out.println(String.format("Ф.И.О: %s, Должность: %s, email: %s, Телефон: %s, Зарплата: %d, Возраст: %d.",
-                this.name, this.position, this.email, this.phone, this.salary, this.age));
+    @Override
+    public String toString() {
+        return String.format("Ф.И.О: %s, Должность: %s, email: %s, Телефон: %s, Зарплата: %d, Возраст: %d.",
+                name, position, email, phone, salary, age);
     }
+
 }
