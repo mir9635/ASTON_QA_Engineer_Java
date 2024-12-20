@@ -1,17 +1,36 @@
 package org.springpattern;
 
+import org.springpattern.lesson_13.PhoneDirectory;
+import org.springpattern.lesson_13.SelectionWords;
+
+import java.sql.SQLOutput;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        String[] words = {"красный", "синий", "желтый", "зеленый", "синий",
+                "черный", "красный", "белый", "фиолетовый", "зеленый",
+                "оранжевый", "желтый", "синий", "красный", "белый"};
+
+
+        SelectionWords selectionWords = new SelectionWords(words);
+        selectionWords.countingNumberWords();
+        selectionWords.printListUniqueWords();
+        selectionWords.printNumberRepetitionsWord();
+
+        System.out.println();
+
+        PhoneDirectory phoneBook = new PhoneDirectory();
+
+
+        phoneBook.add("Иванов", "123-456");
+        phoneBook.add("Петров", "234-567");
+        phoneBook.add("Иванов", "345-678");
+
+        System.out.println(phoneBook.get("Иванов"));
+        System.out.println(phoneBook.get("Сидоров"));
+
     }
 }
