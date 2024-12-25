@@ -1,0 +1,13 @@
+Index: src/main/java/org/springpattern/Lesson_14/FactorialCalculator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/springpattern/Lesson_14/FactorialCalculator.java b/src/main/java/org/springpattern/Lesson_14/FactorialCalculator.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/org/springpattern/Lesson_14/FactorialCalculator.java	
+@@ -0,0 +1,3 @@
++package org.springpattern.Lesson_14;
++public class FactorialCalculator {
++}
