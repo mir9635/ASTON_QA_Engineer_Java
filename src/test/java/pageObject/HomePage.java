@@ -1,5 +1,6 @@
 package pageObject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,7 +40,7 @@ public class HomePage extends BasePage {
         URL = "https://www.mts.by/";
     }
 
-
+    @Step("Закрытие окна куки.")
     public void handleCookiePopup() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
@@ -53,12 +54,13 @@ public class HomePage extends BasePage {
         }
     }
 
+    @Step("Прокрутка главной страницы до блока 'Онлайн пополнение без комиссии'.")
     public void scrollToRow() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(onlineReplenishment));
     }
 
-
+    @Step("Проверка плейсхолдера полей в форме для элемента {optionToSelect}.")
     public void fieldSelectionAndVerification(String optionToSelect, Map<String, String> fieldChecks) {
         WebElement selectHeader = driver.findElement(onlineReplenishmentFields);
         selectHeader.click();
@@ -88,6 +90,7 @@ public class HomePage extends BasePage {
         }
     }
 
+    @Step("Заполнение формы и клик на кнопку 'Продолжить'.")
     public void fillingFieldsCommunicationServices() {
         WebElement phoneInput = driver.findElement(onlineReplenishmentPhoneInput);
         System.out.println(phoneInput.isDisplayed() + "  " + phoneInput.getText());
@@ -110,14 +113,17 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(this.wrapper));
     }
 
+    @Step("Проверка суммы в заголовке.")
     public void comparisonEnteredAmountInTitle() {
         comparisonEnteredValues("50.00 BYN", paymentWindoweHaderAmount);
     }
 
+    @Step("Проверка суммы в кнопке.")
     public void comparisonEnteredAmountInButton() {
         comparisonEnteredValues("Оплатить 50.00 BYN", paymentWindowAmountButton);
     }
 
+    @Step("Проверка номера телефона в поле.")
     public void comparisonPhoneNumber() {
         comparisonEnteredValues("375297777777", phonePaymentWindow);
     }
@@ -139,18 +145,22 @@ public class HomePage extends BasePage {
         return phoneNumber;
     }
 
+    @Step("Проверка текста плейсхолдера номера карты.")
     public void bankCardNumber() {
         comparisonEmptyBankCardFields("Номер карты", bankCardPaymentWindow);
     }
 
+    @Step("Проверка текста плейсхолдера срока действия карты.")
     public void bankCardValidityPeriod() {
         comparisonEmptyBankCardFields("Срок действия", paymentWindowCardExpirationDate);
     }
 
+    @Step("Проверка текста плейсхолдера CVC карты.")
     public void bankCardCVC() {
         comparisonEmptyBankCardFields("CVC", paymentWindowCVC);
     }
 
+    @Step("Проверка текста плейсхолдера имя держателя карты.")
     public void bankCardName() {
         comparisonEmptyBankCardFields("Имя держателя (как на карте)", paymentWindowName);
     }
@@ -168,6 +178,7 @@ public class HomePage extends BasePage {
         driver.switchTo().defaultContent();
     }
 
+    @Step("Проверка отображения иконок и наличие URL.")
     public void paymentWindowPaymentIcons() {
         openIframe();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
