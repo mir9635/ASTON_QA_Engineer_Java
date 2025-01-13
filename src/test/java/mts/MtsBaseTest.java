@@ -15,6 +15,7 @@ import java.util.List;
 public class MtsBaseTest {
     protected WebDriver driver;
     protected final String url = "https://www.mts.by/";
+    protected boolean isInsideFrame = false;
 
 
     private static String browserList = "chrome";
@@ -52,7 +53,7 @@ public class MtsBaseTest {
             WebElement acceptButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("cookie-agree")));
 
             acceptButton.click();
-        } catch (NoSuchElementException e) {
+        } catch (Exception e) {
             // Игнорируем, если элемент не найден
         }
     }
@@ -64,6 +65,9 @@ public class MtsBaseTest {
 
     @AfterEach
     public void tearDown() {
+        if (isInsideFrame) {
+            driver.switchTo().defaultContent();
+        }
         if (driver != null) {
             driver.quit();
         }

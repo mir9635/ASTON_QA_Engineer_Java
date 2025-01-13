@@ -1,10 +1,13 @@
 package mts.online_replenishment;
 
-import jdk.jfr.Description;
+import dev.failsafe.internal.util.Assert;
 import locators.PageObject;
 import mts.MtsBaseTest;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,7 +20,7 @@ public class MtsOnlineReplenishment extends MtsBaseTest {
 
 
     @Test
-    @Description("Проверка названия указанного блока: \"Онлайн пополнение без комиссии\"")
+    @DisplayName("Проверка названия указанного блока: \"Онлайн пополнение без комиссии\"")
     public void testTitle() {
         basicFunctionality();
         WebElement h2Element = driver.findElement(PageObject.h2Title);
@@ -25,27 +28,16 @@ public class MtsOnlineReplenishment extends MtsBaseTest {
         assertEquals("Онлайн пополнение без комиссии", h2Text);
     }
 
-    @Test
-    @Description("Проверка наличия логотипов платёжных систем")
-    public void testLogo() {
+    @DisplayName("Проверка наличия логотипов платёжных систем")
+    @ValueSource(strings = {"Visa", "Verified By Visa", "MasterCard", "MasterCard Secure Code", "Белкарт"})
+    @ParameterizedTest
+    public void testLogo(String altText) {
         basicFunctionality();
-        String[] expectedAltTexts = {
-                "Visa", "Verified By Visa", "MasterCard", "MasterCard Secure Code", "Белкарт"
-        };
-        for (String altText : expectedAltTexts) {
-            System.out.println(altText);
-            try {
-                WebElement logo = driver.findElement(PageObject.logoSelector(altText));
-                Assertions.assertNotNull(logo, "Логотип с alt: '" + altText + "' не найден");
-            } catch (NoSuchElementException e) {
-                System.out.println("Логотип с alt: '" + altText + "' не найден");
-                Assertions.fail("Логотип с alt: '" + altText + "' не найден");
-            }
-        }
+        driver.findElement(PageObject.logoSelector(altText));
     }
 
     @Test
-    @Description("Проверка работы ссылки \"Подробнее о сервисе\"")
+    @DisplayName("Проверка работы ссылки \"Подробнее о сервисе\"")
     public void testServiceLink() {
         basicFunctionality();
         WebElement serviceLink = driver.findElement(PageObject.textLink);
@@ -62,7 +54,7 @@ public class MtsOnlineReplenishment extends MtsBaseTest {
     }
 
     @Test
-    @Description("Проверка кнопки \"Продолжить\" в форме \"Услуги связи\" при заполненных полях")
+    @DisplayName("Проверка кнопки \"Продолжить\" в форме \"Услуги связи\" при заполненных полях")
     public void testInstalmentFormFields() {
         basicFunctionality();
         WebElement phoneInput = driver.findElement(PageObject.phoneInput);
@@ -80,15 +72,8 @@ public class MtsOnlineReplenishment extends MtsBaseTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement iframeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(PageObject.iframeElement));
         driver.switchTo().frame(iframeElement);
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(PageObject.wrapper));
-        } catch (TimeoutException e) {
-            System.out.println("Попап не найден.");
-        } finally {
-
-            driver.switchTo().defaultContent();
-        }
+        isInsideFrame = true;
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PageObject.wrapper));
     }
 
 }
