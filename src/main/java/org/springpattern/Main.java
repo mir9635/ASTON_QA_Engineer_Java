@@ -1,17 +1,51 @@
 package org.springpattern;
 
+import org.springpattern.lesson_12.ArrayProcessor;
+import org.springpattern.myexceptions.MyArrayDataException;
+import org.springpattern.myexceptions.MyArraySizeException;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        String[][] correctArray = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", "15", "16"}
+        };
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+        String[][] incorrectDataArray = {
+                {"1", "2", "3", "4"},
+                {"5", "abc", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", "15", "16"}
+        };
+
+
+        String[][] wrongSizeArray = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"}
+        };
+
+
+        try {
+            System.out.println("Сумма элементов: " + ArrayProcessor.processArray(correctArray));
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            System.out.println("Сумма элементов: " + ArrayProcessor.processArray(incorrectDataArray));
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            System.out.println("Сумма элементов: " + ArrayProcessor.processArray(wrongSizeArray));
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.err.println(e.getMessage());
         }
     }
 }
